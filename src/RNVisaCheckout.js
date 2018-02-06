@@ -6,7 +6,7 @@ const { RNVisaCheckout } = NativeModules;
 type ConfigureResponse = {
   status: number,
 };
-export const configureProfileAsync = async (environment, apiKey, profileName): Promise<ConfigureResponse> => {
+export const configureProfileAsync = async (environment: number, apiKey: string, profileName: string): Promise<ConfigureResponse> => {
   return await RNVisaCheckout.configureProfile(environment, apiKey, profileName);
 };
 
@@ -19,7 +19,7 @@ type CheckoutResponse = {
   cardBrand: number,
   encryptedKey: string,
 }
-export const checkoutAsync = async (total, currency): Promise<CheckoutResponse> => {
+export const checkoutAsync = async (total: string, currency: number): Promise<CheckoutResponse> => {
   return await RNVisaCheckout.checkout(total, currency);
 };
 
