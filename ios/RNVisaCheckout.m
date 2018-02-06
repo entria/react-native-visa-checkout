@@ -11,22 +11,6 @@
 - (NSDictionary *)constantsToExport
 {
     return @{
-             @"ConfigStatus":@{
-                     @"DebugNotSupported":@(VisaCheckoutConfigStatusDebugModeNotSupported),
-                     @"InternalError":@(VisaCheckoutConfigStatusInternalError),
-                     @"InvalidAPIKey":@(VisaCheckoutConfigStatusInvalidAPIKey),
-                     @"NetworkFailure":@(VisaCheckoutConfigStatusNetworkFailure),
-                     @"NoCommonSupportedOrientations":@(VisaCheckoutConfigStatusNoCommonSupportedOrientations),
-                     @"SdkVersionDeprecation":@(VisaCheckoutConfigStatusSdkVersionDeprecation),
-                     @"Success":@(VisaCheckoutConfigStatusSuccess)
-                     },
-             @"ResultStatus":@{
-                     @"DuplicateCheckoutAttempt":@(VisaCheckoutResultStatusDuplicateCheckoutAttempt),
-                     @"InternalError":@(VisaCheckoutResultStatusInternalError),
-                     @"NotConfigured":@(VisaCheckoutResultStatusNotConfigured),
-                     @"Success":@(VisaCheckoutResultStatusSuccess),
-                     @"Cancelled":@(VisaCheckoutResultStatusUserCancelled)
-                     },
              @"Environment":@{
                      @"Production":@(VisaEnvironmentProduction),
                      @"Sandbox":@(VisaEnvironmentSandbox)
@@ -113,7 +97,41 @@ RCT_REMAP_METHOD(configureProfile,
                                            if (statusCode == VisaCheckoutConfigStatusSuccess) {
                                                resolve(@{@"status":@(result)});
                                            } else {
-                                               reject(@(result), @"Error during environment configuration of Visa checkout", nil);
+                                               NSString *errorString = nil;
+                                               NSString *errorCode = nil;
+                                               switch (statusCode) {
+                                                   case VisaCheckoutConfigStatusDebugModeNotSupported:
+                                                       errorString = @"Debug mode not supported error";
+                                                       errorCode = @"E_CONFIGURE_DEBUG_MODE";
+                                                       break;
+                                                   case VisaCheckoutConfigStatusInternalError:
+                                                       errorString = @"Visa Checkout internal error";
+                                                       errorCode = @"E_CONFIGURE_INTERNAL_ERROR";
+                                                       break;
+                                                   case VisaCheckoutConfigStatusInvalidAPIKey:
+                                                       errorString = @"Invalid API key error";
+                                                       errorCode = @"E_CONFIGURE_INVALID_API_KEY";
+                                                       break;
+                                                   case VisaCheckoutConfigStatusInvalidProfileName:
+                                                       errorString = @"Invalid profile name error";
+                                                       errorCode = @"E_CONFIGURE_INVALID_PROFILE_NAME";
+                                                       break;
+                                                   case VisaCheckoutConfigStatusNetworkFailure:
+                                                       errorString = @"Network failure error";
+                                                       errorCode = @"E_CONFIGURE_NETWORK_FAILURE";
+                                                       break;
+                                                   case VisaCheckoutConfigStatusNoCommonSupportedOrientations:
+                                                       errorString = @"No common supported orientations error";
+                                                       errorCode = @"E_CONFIGURE_NO_COMMON_ORIENTATIONS";
+                                                       break;
+                                                   case VisaCheckoutConfigStatusSdkVersionDeprecation:
+                                                       errorString = @"SDK version deprecation error";
+                                                       errorCode = @"E_CONFIGURE_UNSUPPORTED_SDK_VERSION";
+                                                       break;
+                                                   default:
+                                                       break;
+                                               }
+                                               reject(errorCode, errorString, nil);
                                            }
                                        }];
 }
@@ -129,7 +147,30 @@ RCT_REMAP_METHOD(checkout,
         if (result.statusCode == VisaCheckoutResultStatusSuccess) {
             resolve([self createJsonResponseFromCheckoutResult:result]);
         } else {
-            reject(@(result.statusCode), @"Error during Visa checkout", nil);
+            VisaCheckoutResultStatus resultStatus = result.statusCode;
+            NSString *errorString = nil;
+            NSString *errorCode = nil;
+            switch (resultStatus) {
+                case VisaCheckoutResultStatusInternalError:
+                    errorString = @"Checkout internal error";
+                    errorCode = @"E_CHECKOUT_INTERNAL_ERROR";
+                    break;
+                case VisaCheckoutResultStatusNotConfigured:
+                    errorString = @"Checkout not configured";
+                    errorCode = @"E_CHECKOUT_NOT_CONFIGURED";
+                    break;
+                case VisaCheckoutResultStatusUserCancelled:
+                    errorString = @"User cancelled";
+                    errorCode = @"E_CHECKOUT_CANCELLED";
+                    break;
+                case VisaCheckoutResultStatusDuplicateCheckoutAttempt:
+                    errorString = @"Duplicate checkout attempt";
+                    errorCode = @"E_CHECKOUT_DUPLICATE_CHECKOUT";
+                    break;
+                default:
+                    break;
+            }
+            reject(errorCode, errorString, nil);
         }
     }];
 }
@@ -148,6 +189,3 @@ RCT_REMAP_METHOD(checkout,
 }
 
 @end
-
-
-
