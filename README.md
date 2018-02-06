@@ -47,7 +47,8 @@
 Go to your Build Phases tab for your target’s settings.
 Click on the + icon and select New Run Script Phase. Make sure the script is run after Embedded Frameworks.
 Select the ✅Run script only when installing option.
-Paste the following code into the script code window:```
+Paste the following code into the script code window:
+```
 
 ```
 # This script removes simulator architectures from VisaCheckoutSDK.framework so it can be uploaded to the App Store.
