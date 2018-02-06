@@ -1,16 +1,26 @@
-
+// @flow
 import { NativeModules } from 'react-native';
 
 const { RNVisaCheckout } = NativeModules;
 
-export const configureProfileAsync = async (environment, apiKey, profileName) => {
-  const data = await RNVisaCheckout.configureProfile(environment, apiKey, profileName);
-  return data;
+type ConfigureResponse = {
+  status: number,
+};
+export const configureProfileAsync = async (environment, apiKey, profileName): Promise<ConfigureResponse> => {
+  return await RNVisaCheckout.configureProfile(environment, apiKey, profileName);
 };
 
-export const checkoutAsync = async (total, currency) => {
-  const data = await RNVisaCheckout.checkout(total, currency);
-  return data;
+type CheckoutResponse = {
+  callId: string,
+  lastFourDigits: string,
+  country: number,
+  postalCode: string,
+  paymentMethodType: string,
+  cardBrand: number,
+  encryptedKey: string,
+}
+export const checkoutAsync = async (total, currency): Promise<CheckoutResponse> => {
+  return await RNVisaCheckout.checkout(total, currency);
 };
 
 export const Constants = {
