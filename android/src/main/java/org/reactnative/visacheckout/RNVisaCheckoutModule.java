@@ -13,9 +13,6 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableMap;
-import com.visa.checkout.Environment;
-import com.visa.checkout.Profile;
-import com.visa.checkout.PurchaseInfo;
 import com.visa.checkout.VisaCheckoutSdk;
 import com.visa.checkout.VisaCheckoutSdkInitListener;
 import com.visa.checkout.VisaPaymentSummary;
@@ -75,40 +72,40 @@ public class RNVisaCheckoutModule extends ReactContextBaseJavaModule {
             private Map<String, Object> getEnvConstants() {
                 return Collections.unmodifiableMap(new HashMap<String, Object>() {
                     {
-                        put("Production", Environment.PRODUCTION);
-                        put("Sandbox", Environment.SANDBOX);
+                        put("Production", Constants.ENVIRONMENT_PRODUCTION);
+                        put("Sandbox", Constants.ENVIRONMENT_SANDBOX);
                     }
                 });
             }
           private Map<String, Object> getCountryConstants() {
               return Collections.unmodifiableMap(new HashMap<String, Object>() {
                   {
-                      put("Argentina", Profile.Country.AR);
-                      put("Australia", Profile.Country.AU);
-                      put("Brazil", Profile.Country.BR);
-                      put("Canada", Profile.Country.CA);
-                      put("Chile", Profile.Country.CL);
-                      put("China", Profile.Country.CN);
-                      put("Colombia", Profile.Country.CO);
-                      put("France", Profile.Country.FR);
-                      put("HongKong", Profile.Country.HK);
-                      put("India", Profile.Country.IN);
-                      put("Ireland", Profile.Country.IE);
-                      put("Kuwait", Profile.Country.KW);
-                      put("Malaysia", Profile.Country.MY);
-                      put("Mexico", Profile.Country.MX);
-                      put("NewZealand", Profile.Country.NZ);
-                      put("Peru", Profile.Country.PE);
-                      put("Poland", Profile.Country.PL);
-                      put("Qatar", Profile.Country.QA);
-                      put("SaudiArabia", Profile.Country.SA);
-                      put("Singapore", Profile.Country.SG);
-                      put("SouthAfrica", Profile.Country.ZA);
-                      put("Spain", Profile.Country.ES);
-                      put("Ukraine", Profile.Country.UA);
-                      put("UnitedArabEmirates", Profile.Country.AE);
-                      put("UnitedKingdom", Profile.Country.GB);
-                      put("UnitedStates", Profile.Country.US);
+                      put("Argentina", Constants.COUNTRY_ARGENTINA);
+                      put("Australia", Constants.COUNTRY_AUSTRALIA);
+                      put("Brazil", Constants.COUNTRY_BRAZIL);
+                      put("Canada", Constants.COUNTRY_CANADA);
+                      put("Chile", Constants.COUNTRY_CHILE);
+                      put("China", Constants.COUNTRY_CHINA);
+                      put("Colombia", Constants.COUNTRY_COLOMBIA);
+                      put("France", Constants.COUNTRY_FRANCE);
+                      put("HongKong", Constants.COUNTRY_HONGKONG);
+                      put("India", Constants.COUNTRY_INDIA);
+                      put("Ireland", Constants.COUNTRY_IRELAND);
+                      put("Kuwait", Constants.COUNTRY_KUWAIT);
+                      put("Malaysia", Constants.COUNTRY_MALAYSIA);
+                      put("Mexico", Constants.COUNTRY_MEXICO);
+                      put("NewZealand", Constants.COUNTRY_NEW_ZEALAND);
+                      put("Peru", Constants.COUNTRY_PERU);
+                      put("Poland", Constants.COUNTRY_POLAND);
+                      put("Qatar", Constants.COUNTRY_QATAR);
+                      put("SaudiArabia", Constants.COUNTRY_SAUDI_ARABIA);
+                      put("Singapore", Constants.COUNTRY_SINGAPORE);
+                      put("SouthAfrica", Constants.COUNTRY_SOUTH_AFRICA);
+                      put("Spain", Constants.COUNTRY_SPAIN);
+                      put("Ukraine", Constants.COUNTRY_UKRAINE);
+                      put("UnitedArabEmirates", Constants.COUNTRY_UNITED_ARAB_EMIRATES);
+                      put("UnitedKingdom", Constants.COUNTRY_UNITED_KINGDOM);
+                      put("UnitedStates", Constants.COUNTRY_UNITED_STATES);
                   }
               });
           }
@@ -116,30 +113,30 @@ public class RNVisaCheckoutModule extends ReactContextBaseJavaModule {
           private Map<String, Object> getCurrencyConstants() {
               return Collections.unmodifiableMap(new HashMap<String, Object>() {
                   {
-                      put("AED", PurchaseInfo.Currency.AED);
-                      put("ARS", PurchaseInfo.Currency.ARS);
-                      put("AUD", PurchaseInfo.Currency.AUD);
-                      put("BRL", PurchaseInfo.Currency.BRL);
-                      put("CAD", PurchaseInfo.Currency.CAD);
-                      put("CLP", PurchaseInfo.Currency.CLP);
-                      put("CNY", PurchaseInfo.Currency.CNY);
-                      put("COP", PurchaseInfo.Currency.COP);
-                      put("EUR", PurchaseInfo.Currency.EUR);
-                      put("GBP", PurchaseInfo.Currency.GBP);
-                      put("HKD", PurchaseInfo.Currency.HKD);
-                      put("INR", PurchaseInfo.Currency.INR);
-                      put("KWD", PurchaseInfo.Currency.KWD);
-                      put("MXN", PurchaseInfo.Currency.MXN);
-                      put("MYR", PurchaseInfo.Currency.MYR);
-                      put("NZD", PurchaseInfo.Currency.NZD);
-                      put("PEN", PurchaseInfo.Currency.PEN);
-                      put("PLN", PurchaseInfo.Currency.PLN);
-                      put("QAR", PurchaseInfo.Currency.QAR);
-                      put("SAR", PurchaseInfo.Currency.SAR);
-                      put("SGD", PurchaseInfo.Currency.SGD);
-                      put("UAH", PurchaseInfo.Currency.UAH);
-                      put("USD", PurchaseInfo.Currency.USD);
-                      put("ZAR", PurchaseInfo.Currency.ZAR);
+                      put("AED", Constants.CURRENCY_AED);
+                      put("ARS", Constants.CURRENCY_ARS);
+                      put("AUD", Constants.CURRENCY_AUD);
+                      put("BRL", Constants.CURRENCY_BRL);
+                      put("CAD", Constants.CURRENCY_CAD);
+                      put("CLP", Constants.CURRENCY_CLP);
+                      put("CNY", Constants.CURRENCY_CNY);
+                      put("COP", Constants.CURRENCY_COP);
+                      put("EUR", Constants.CURRENCY_EUR);
+                      put("GBP", Constants.CURRENCY_GBP);
+                      put("HKD", Constants.CURRENCY_HKD);
+                      put("INR", Constants.CURRENCY_INR);
+                      put("KWD", Constants.CURRENCY_KWD);
+                      put("MXN", Constants.CURRENCY_MXN);
+                      put("MYR", Constants.CURRENCY_MYR);
+                      put("NZD", Constants.CURRENCY_NZD);
+                      put("PEN", Constants.CURRENCY_PEN);
+                      put("PLN", Constants.CURRENCY_PLN);
+                      put("QAR", Constants.CURRENCY_QAR);
+                      put("SAR", Constants.CURRENCY_SAR);
+                      put("SGD", Constants.CURRENCY_SGD);
+                      put("UAH", Constants.CURRENCY_UAH);
+                      put("USD", Constants.CURRENCY_USD);
+                      put("ZAR", Constants.CURRENCY_ZAR);
                   }
               });
           }
@@ -147,16 +144,15 @@ public class RNVisaCheckoutModule extends ReactContextBaseJavaModule {
           private Map<String, Object> getCardConstants() {
               return Collections.unmodifiableMap(new HashMap<String, Object>() {
                   {
-                      put("Amex", Profile.CardBrand.AMEX);
-                      put("Discover", Profile.CardBrand.DISCOVER);
-                      put("Electron", Profile.CardBrand.ELECTRON);
-                      put("Elo", Profile.CardBrand.ELO);
-                      put("Mastercard", Profile.CardBrand.MASTERCARD);
-                      put("Visa", Profile.CardBrand.VISA);
+                      put("Amex", Constants.CARD_BRAND_AMEX);
+                      put("Discover", Constants.CARD_BRAND_DISCOVER);
+                      put("Electron", Constants.CARD_BRAND_ELECTRON);
+                      put("Elo", Constants.CARD_BRAND_ELO);
+                      put("Mastercard", Constants.CARD_BRAND_MASTERCARD);
+                      put("Visa", Constants.CARD_BRAND_VISA);
                   }
               });
           }
-
         });
     }
 
@@ -192,8 +188,9 @@ public class RNVisaCheckoutModule extends ReactContextBaseJavaModule {
   };
 
   @ReactMethod
-  public void configureProfile(final String environment, final String apiKey, final String profileName, final Promise promise) {
-      VisaCheckoutSdk.init(getReactApplicationContext(), environment,
+  public void configureProfile(final int environment, final String apiKey, final String profileName, final Promise promise) {
+      String envString = RNVisaCheckoutHelper.getEnvironmentStringFromConstant(environment);
+      VisaCheckoutSdk.init(getReactApplicationContext(), envString,
             apiKey, profileName,
             new VisaCheckoutSdkInitListener() {
               @Override public void status(int code, String message) {
@@ -221,12 +218,13 @@ public class RNVisaCheckoutModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void checkout(final double total, final String currency, final Promise promise) {
+  public void checkout(final double total, final int currency, final Promise promise) {
     Activity currentActivity = getCurrentActivity();
+    String currencyString = RNVisaCheckoutHelper.getCurrencyStringFromConstant(currency);
     Intent intent = VisaCheckoutSdk.getCheckoutIntent(
             currentActivity,
             new BigDecimal(total),
-            currency
+            currencyString
     );
     mCheckoutPromise = promise;
     try {
@@ -245,8 +243,8 @@ public class RNVisaCheckoutModule extends ReactContextBaseJavaModule {
       map.putString("lastFourDigits", paymentSummary.getLastFourDigits() != null ? paymentSummary.getLastFourDigits() : "null");
       map.putString("paymentMethodType", paymentSummary.getPaymentMethodType() != null ? paymentSummary.getPaymentMethodType() : "null");
       map.putString("postalCode", paymentSummary.getPostalCode() != null ? paymentSummary.getPostalCode() : "null");
-      map.putString("cardBrand", paymentSummary.getCardBrand() != null ? paymentSummary.getCardBrand() : "null");
-      map.putString("country", paymentSummary.getCountryCode() != null ? paymentSummary.getCountryCode() : "null");
+      map.putInt("cardBrand", RNVisaCheckoutHelper.getCardBrandCodeFromString(paymentSummary.getCardBrand()));
+      map.putInt("country", RNVisaCheckoutHelper.getCountryCodeFromString(paymentSummary.getCountryCode()));
       return map;
   }
 }
