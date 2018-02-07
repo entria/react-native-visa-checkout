@@ -3,6 +3,10 @@
 
 @implementation RNVisaCheckout
 
+- (UIView *)view {
+    return [[VisaCheckoutButton alloc] init];
+}
+
 - (dispatch_queue_t)methodQueue
 {
     return dispatch_get_main_queue();
@@ -173,6 +177,18 @@ RCT_REMAP_METHOD(checkout,
             reject(errorCode, errorString, nil);
         }
     }];
+}
+
+RCT_CUSTOM_VIEW_PROPERTY(cardStyle, NSInteger, VisaCheckoutButton)
+{
+    enum VisaCheckoutButtonStyle argument = [RCTConvert NSInteger:json];
+    [view setStyle:argument];
+}
+
+RCT_CUSTOM_VIEW_PROPERTY(cardAnimations, BOOL, VisaCheckoutButton)
+{
+    BOOL argument = [RCTConvert BOOL:json];
+    [view setEnableAnimation:argument];
 }
 
 - (NSDictionary *) createJsonResponseFromCheckoutResult:(VisaCheckoutResult *)result {
