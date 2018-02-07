@@ -4,9 +4,24 @@ import { RNVisaCheckoutButton } from 'react-native-visa-checkout';
 
 export default class CameraScreen extends React.Component {
 
+  onCardCheckout = (event) => {
+    console.log('onCardCheckout');
+    console.log(`callId: ${event.callId}`);
+  }
+
+  onCardCheckoutError = ({ code, message }) => {
+    console.log('onCardCheckoutError');
+    console.log(`Error with code: ${code}, message: ${message}`);
+  }
+
   render() {
+    const checkoutOption = { total: 22.09, currency: RNVisaCheckoutButton.Constants.Currency.USD };
     return (<View style={styles.container}>
-              <RNVisaCheckoutButton style={styles.navigation} />
+              <RNVisaCheckoutButton 
+                style={styles.navigation} 
+                checkoutOptions={checkoutOption} 
+                onCardCheckout={this.onCardCheckout} 
+                onCardCheckoutError={this.onCardCheckoutError} />
             </View>);
   }
 }

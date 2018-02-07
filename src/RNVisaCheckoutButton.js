@@ -16,12 +16,28 @@ export default class CheckoutButton extends React.Component {
     ...ViewPropTypes,
     cardStyle: PropTypes.number,
     cardAnimations: PropTypes.bool,
+    onCardCheckout: PropTypes.func,
+    onCardCheckoutError: PropTypes.func,
+    checkoutOptions: PropTypes.object,
   };
 
   static defaultProps: Object = {
     cardStyle: 1,
     cardAnimations: true,
+    checkoutOptions: { total: 0.0, currency: 0 },
   };
+
+  _onCardCheckout = (event) => {
+    if (this.props.onCardCheckout) {
+      this.props.onCardCheckout(event.nativeEvent);
+    }
+  }
+
+  _onCardCheckoutError = (event) => {
+    if (this.props.onCardCheckoutError) {
+      this.props.onCardCheckoutError(event.nativeEvent);
+    }
+  }
 
   _setReference = (ref) => {
     if (ref) {
@@ -33,15 +49,17 @@ export default class CheckoutButton extends React.Component {
     }
   };
 
-  // async componentWillMount() {
-  //   const data = await RNVisaCheckout.configureProfile(RNVisaCheckout.Environment.Sandbox, 'apiKey', null);
-  // }
+  async componentWillMount() {
+    // const data = await RNVisaCheckout.configureProfile(RNVisaCheckout.Environment.Sandbox, 'apiKey', null);
+  }
 
   render() {
     return (
       <RNVisaCheckoutButton
         {...this.props}
         ref={this._setReference}
+        onCardCheckout={this._onCardCheckout}
+        onCardCheckoutError={this._onCardCheckoutError}
       />
     );
   }

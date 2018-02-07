@@ -14,7 +14,7 @@
     "prettier": "^1.9.2"
   },
   "lint-staged": {
-    "*.js": [
+    "src/*.js": [
       "yarn prettier",
       "eslint --fix",
       "git add"

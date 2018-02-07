@@ -1,10 +1,12 @@
 
 #import "RNVisaCheckout.h"
+#import "RNVisaCheckoutButton.h"
+#import "RNVisaCheckoutUtils.h"
 
 @implementation RNVisaCheckout
 
 - (UIView *)view {
-    return [[VisaCheckoutButton alloc] init];
+    return [[RNVisaCheckoutButton alloc] init];
 }
 
 - (dispatch_queue_t)methodQueue
@@ -86,6 +88,14 @@
 
 RCT_EXPORT_MODULE()
 
+RCT_EXPORT_VIEW_PROPERTY(onCardCheckout, RCTDirectEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(onCardCheckoutError, RCTDirectEventBlock);
+
+- (NSArray<NSString *> *)supportedEvents
+{
+    return @[@"onCardCheckout", @"onCardCheckoutError"];
+}
+
 RCT_REMAP_METHOD(configureProfile,
                  withEnvironment:(nonnull NSNumber *)environment
                  apiKey:(NSString *)apiKey
@@ -149,7 +159,7 @@ RCT_REMAP_METHOD(checkout,
     VisaCurrencyAmount *amount = [[VisaCurrencyAmount alloc] initWithDouble:total.doubleValue];
     [VisaCheckoutSDK checkoutWithTotal:amount currency:currency.integerValue completion:^(VisaCheckoutResult *result) {
         if (result.statusCode == VisaCheckoutResultStatusSuccess) {
-            resolve([self createJsonResponseFromCheckoutResult:result]);
+            resolve([RNVisaCheckoutUtils createJsonResponseFromCheckoutResult:result]);
         } else {
             VisaCheckoutResultStatus resultStatus = result.statusCode;
             NSString *errorString = nil;
@@ -179,29 +189,22 @@ RCT_REMAP_METHOD(checkout,
     }];
 }
 
-RCT_CUSTOM_VIEW_PROPERTY(cardStyle, NSInteger, VisaCheckoutButton)
+RCT_CUSTOM_VIEW_PROPERTY(cardStyle, NSInteger, RNVisaCheckoutButton)
 {
     enum VisaCheckoutButtonStyle argument = [RCTConvert NSInteger:json];
-    [view setStyle:argument];
+    [view setCardStyle:argument];
 }
 
-RCT_CUSTOM_VIEW_PROPERTY(cardAnimations, BOOL, VisaCheckoutButton)
+RCT_CUSTOM_VIEW_PROPERTY(cardAnimations, BOOL, RNVisaCheckoutButton)
 {
     BOOL argument = [RCTConvert BOOL:json];
-    [view setEnableAnimation:argument];
+    [view setCardAnimations:argument];
 }
 
-- (NSDictionary *) createJsonResponseFromCheckoutResult:(VisaCheckoutResult *)result {
-    NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
-    response[@"callId"] = result.callId ? result.callId : @"null";
-    response[@"cardBrand"] = [NSNumber numberWithInteger:result.cardBrand];
-    response[@"country"] = [NSNumber numberWithInteger:result.country];
-    response[@"encryptedKey"] = result.encryptedKey ? result.encryptedKey : @"null";
-    response[@"encryptedPaymentData"] = result.encryptedPaymentData ? result.encryptedPaymentData : @"null";
-    response[@"lastFourDigits"] = result.lastFourDigits ? result.lastFourDigits : @"null";
-    response[@"paymentMethodType"] = result.paymentMethodType ? result.paymentMethodType : @"null";
-    response[@"postalCode"] = result.postalCode ? result.postalCode : @"null";
-    return response;
+RCT_CUSTOM_VIEW_PROPERTY(checkoutOptions, NSDictionary, RNVisaCheckoutButton)
+{
+    NSDictionary *options = [RCTConvert NSDictionary:json];
+    [view updateCheckoutOptions:options];
 }
 
 @end
