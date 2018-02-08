@@ -65,4 +65,4 @@ export default class CheckoutButton extends React.Component {
   }
 }
 
-const RNVisaCheckoutButton = requireNativeComponent('RNVisaCheckout', CheckoutButton);
+const RNVisaCheckoutButton = requireNativeComponent('RNVisaCheckoutButton', CheckoutButton);

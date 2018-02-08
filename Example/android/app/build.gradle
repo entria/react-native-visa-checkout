@@ -103,9 +103,11 @@ android {
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+
     }
     splits {
         abi {
@@ -137,9 +139,12 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-visa-checkout')
-    compile project(':react-native-camera')
     compile fileTree(dir: "libs", include: ["*.jar"])
+    compile(project(":react-native-visa-checkout")){
+        exclude group: "com.android.support"
+    }
+    compile fileTree(dir: "libs", include: ["*.jar"])
+    compile 'com.android.support:design:26.1.0'
     compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.facebook.react:react-native:+"  // From node_modules
 }

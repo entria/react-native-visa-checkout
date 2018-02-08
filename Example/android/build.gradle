@@ -25,6 +25,9 @@ allprojects {
             url "https://maven.google.com" // Google's Maven repository
         }
         maven { url "https://jitpack.io" }
+        flatDir {
+            dirs project(':react-native-visa-checkout').file('libs')
+        }
     }
 }
 

@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#000',
   },
   navigation: {
-    height: 30,
+    height: 50,
     width: 300,
     flexDirection: 'column',
     justifyContent: 'center',
