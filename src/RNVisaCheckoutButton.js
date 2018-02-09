@@ -10,7 +10,7 @@ type CheckoutOptions = {
   currency: number,
 };
 
-type PropsType = ViewPropTypes & {
+type Props = ViewPropTypes & {
   cardStyle?: number,
   cardAnimations?: boolean,
   onCardCheckout?: Function,
@@ -18,7 +18,7 @@ type PropsType = ViewPropTypes & {
   checkoutOptions?: CheckoutOptions,
 };
 
-export default class CheckoutButton extends React.Component<PropsType> {
+export default class CheckoutButton extends React.Component<Props> {
   static Constants = {
     Environment: RNVisaCheckout.Environment,
     Country: RNVisaCheckout.Country,
