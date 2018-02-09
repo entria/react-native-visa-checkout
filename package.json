@@ -1,6 +1,6 @@
 {
   "name": "react-native-visa-checkout",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "",
   "main": "src/index.js",
   "devDependencies": {
@@ -14,7 +14,7 @@
     "prettier": "^1.9.2"
   },
   "lint-staged": {
-    "*.js": [
+    "src/*.js": [
       "yarn prettier",
       "eslint --fix",
       "git add"
@@ -32,8 +32,15 @@
   "keywords": [
     "react-native"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/entria/react-native-visa-checkout.git"
+  },
   "author": "",
   "license": "",
+  "dependencies": {
+    "prop-types": "^15.5.10"
+  },
   "peerDependencies": {
     "react-native": "^0.41.2"
   }

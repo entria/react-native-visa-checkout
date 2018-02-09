@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		71D7F0CF202B8F37008E1F78 /* RNVisaCheckoutButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 71D7F0CE202B8F37008E1F78 /* RNVisaCheckoutButton.m */; };
+		71D7F0D2202B8F77008E1F78 /* RNVisaCheckoutUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 71D7F0D1202B8F77008E1F78 /* RNVisaCheckoutUtils.m */; };
 		B3E7B58A1CC2AC0600A0062D /* RNVisaCheckout.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNVisaCheckout.m */; };
 /* End PBXBuildFile section */
 
@@ -24,6 +26,10 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNVisaCheckout.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNVisaCheckout.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		71D7F0CD202B8F37008E1F78 /* RNVisaCheckoutButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNVisaCheckoutButton.h; sourceTree = "<group>"; };
+		71D7F0CE202B8F37008E1F78 /* RNVisaCheckoutButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNVisaCheckoutButton.m; sourceTree = "<group>"; };
+		71D7F0D0202B8F77008E1F78 /* RNVisaCheckoutUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNVisaCheckoutUtils.h; sourceTree = "<group>"; };
+		71D7F0D1202B8F77008E1F78 /* RNVisaCheckoutUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RNVisaCheckoutUtils.m; sourceTree = "<group>"; };
 		B3E7B5881CC2AC0600A0062D /* RNVisaCheckout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNVisaCheckout.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNVisaCheckout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNVisaCheckout.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -50,6 +56,10 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				71D7F0D0202B8F77008E1F78 /* RNVisaCheckoutUtils.h */,
+				71D7F0D1202B8F77008E1F78 /* RNVisaCheckoutUtils.m */,
+				71D7F0CD202B8F37008E1F78 /* RNVisaCheckoutButton.h */,
+				71D7F0CE202B8F37008E1F78 /* RNVisaCheckoutButton.m */,
 				B3E7B5881CC2AC0600A0062D /* RNVisaCheckout.h */,
 				B3E7B5891CC2AC0600A0062D /* RNVisaCheckout.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
@@ -112,6 +122,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71D7F0CF202B8F37008E1F78 /* RNVisaCheckoutButton.m in Sources */,
+				71D7F0D2202B8F77008E1F78 /* RNVisaCheckoutUtils.m in Sources */,
 				B3E7B58A1CC2AC0600A0062D /* RNVisaCheckout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -24,8 +24,6 @@ export const checkoutAsync = async (total: string, currency: number): Promise<Ch
 };
 
 export const Constants = {
-  ConfigStatus: RNVisaCheckout.ConfigStatus,
-  ResultStatus: RNVisaCheckout.ResultStatus,
   Environment: RNVisaCheckout.Environment,
   Country: RNVisaCheckout.Country,
   Currency: RNVisaCheckout.Currency,
