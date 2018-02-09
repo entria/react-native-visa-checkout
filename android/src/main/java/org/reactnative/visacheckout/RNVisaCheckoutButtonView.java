@@ -50,7 +50,7 @@ public class RNVisaCheckoutButtonView extends RelativeLayout {
 
     public void setCardStyle(int cardStyle) {
         VisaCheckoutButton btn = (VisaCheckoutButton)findViewById(R.id.visaCheckoutButton);
-        if (cardStyle == 1) {
+        if (cardStyle == Constants.CARD_STYLE_STANDARD) {
             btn.setColorStyle("STANDARD");
         } else {
             btn.setColorStyle("NEUTRAL");

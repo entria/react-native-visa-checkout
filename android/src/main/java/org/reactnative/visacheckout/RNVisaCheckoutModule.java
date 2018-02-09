@@ -66,6 +66,7 @@ public class RNVisaCheckoutModule extends ReactContextBaseJavaModule {
                 put("Country", getCountryConstants());
                 put("Currency", getCurrencyConstants());
                 put("Card", getCardConstants());
+                put("CardStyle", getCardStyleConstants());
             }
 
             private Map<String, Object> getEnvConstants() {
@@ -73,6 +74,15 @@ public class RNVisaCheckoutModule extends ReactContextBaseJavaModule {
                     {
                         put("Production", Constants.ENVIRONMENT_PRODUCTION);
                         put("Sandbox", Constants.ENVIRONMENT_SANDBOX);
+                    }
+                });
+            }
+
+            private Map<String, Object> getCardStyleConstants() {
+                return Collections.unmodifiableMap(new HashMap<String, Object>() {
+                    {
+                        put("Neutral", Constants.CARD_STYLE_NEUTRAL);
+                        put("Standard", Constants.CARD_STYLE_STANDARD);
                     }
                 });
             }

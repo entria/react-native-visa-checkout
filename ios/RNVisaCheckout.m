@@ -82,6 +82,10 @@
                      @"Elo":@(VisaCardBrandElo),
                      @"Mastercard":@(VisaCardBrandMastercard),
                      @"Visa":@(VisaCardBrandVisa)
+                     },
+             @"CardStyle":@{
+                     @"Neutral":@(VisaCheckoutButtonStyleNeutral),
+                     @"Standard":@(VisaCheckoutButtonStyleStandard)
                      }
              };
 }

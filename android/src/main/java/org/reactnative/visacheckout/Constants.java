@@ -12,6 +12,9 @@ public interface Constants {
     int ENVIRONMENT_PRODUCTION = 0;
     int ENVIRONMENT_SANDBOX = 1;
 
+    int CARD_STYLE_NEUTRAL = 0;
+    int CARD_STYLE_STANDARD = 1;
+
     int CURRENCY_AED = 0;
     int CURRENCY_ARS = 1;
     int CURRENCY_AUD = 2;

@@ -28,4 +28,5 @@ export const Constants = {
   Country: RNVisaCheckout.Country,
   Currency: RNVisaCheckout.Currency,
   Card: RNVisaCheckout.Card,
+  CardStyle: RNVisaCheckout.CardStyle,
 };

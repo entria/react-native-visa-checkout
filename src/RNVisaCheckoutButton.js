@@ -24,6 +24,7 @@ export default class CheckoutButton extends React.Component<Props> {
     Country: RNVisaCheckout.Country,
     Currency: RNVisaCheckout.Currency,
     Card: RNVisaCheckout.Card,
+    CardStyle: RNVisaCheckout.CardStyle,
   };
 
   static propTypes = {
@@ -36,7 +37,7 @@ export default class CheckoutButton extends React.Component<Props> {
   };
 
   static defaultProps: Object = {
-    cardStyle: 1,
+    cardStyle: RNVisaCheckout.CardStyle.Standard,
     cardAnimations: true,
     checkoutOptions: { total: 0.0, currency: 0 },
   };
