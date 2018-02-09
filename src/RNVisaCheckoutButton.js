@@ -1,10 +1,24 @@
+// @flow
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NativeModules, findNodeHandle, requireNativeComponent, ViewPropTypes, Platform } from 'react-native';
 
 const { RNVisaCheckout } = NativeModules;
 
-export default class CheckoutButton extends React.Component {
+type CheckoutOptions = {
+  total: number,
+  currency: number,
+};
+
+type Props = ViewPropTypes & {
+  cardStyle?: number,
+  cardAnimations?: boolean,
+  onCardCheckout?: Function,
+  onCardCheckoutError?: Function,
+  checkoutOptions?: CheckoutOptions,
+};
+
+export default class CheckoutButton extends React.Component<Props> {
   static Constants = {
     Environment: RNVisaCheckout.Environment,
     Country: RNVisaCheckout.Country,
