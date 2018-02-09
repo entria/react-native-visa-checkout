@@ -6,6 +6,9 @@ package org.reactnative.visacheckout;
 
 public interface Constants {
 
+    int VISA_CHECKOUT_REQUEST = 10012;
+    int VISA_CARD_CHECKOUT = 10013;
+
     int ENVIRONMENT_PRODUCTION = 0;
     int ENVIRONMENT_SANDBOX = 1;
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NativeModules, findNodeHandle, requireNativeComponent, ViewPropTypes } from 'react-native';
+import { NativeModules, findNodeHandle, requireNativeComponent, ViewPropTypes, Platform } from 'react-native';
 
 const { RNVisaCheckout } = NativeModules;
 
@@ -65,4 +65,6 @@ export default class CheckoutButton extends React.Component {
   }
 }
 
-const RNVisaCheckoutButton = requireNativeComponent('RNVisaCheckoutButton', CheckoutButton);
+const nativeComponentName = Platform.OS === 'android' ? 'RNVisaCheckoutButton' : 'RNVisaCheckout';
+
+const RNVisaCheckoutButton = requireNativeComponent(nativeComponentName, CheckoutButton);

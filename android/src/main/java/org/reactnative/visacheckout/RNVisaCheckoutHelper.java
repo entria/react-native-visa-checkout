@@ -1,8 +1,18 @@
 package org.reactnative.visacheckout;
 
+import android.view.ViewGroup;
+
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.ReactContext;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.uimanager.UIManagerModule;
 import com.visa.checkout.Environment;
 import com.visa.checkout.Profile;
 import com.visa.checkout.PurchaseInfo;
+import com.visa.checkout.VisaPaymentSummary;
+
+import org.reactnative.visacheckout.events.CardCheckoutEvent;
+import org.reactnative.visacheckout.events.CardCheckoutEventError;
 
 /**
  * Created by jgfidelis on 07/02/18.
@@ -330,5 +340,28 @@ public class RNVisaCheckoutHelper {
         }
 
         return currencyString;
+    }
+
+    public static WritableMap getPaymentSummaryMap(VisaPaymentSummary paymentSummary) {
+        WritableMap map = Arguments.createMap();
+        map.putString("callId", paymentSummary.getCallId() != null ? paymentSummary.getCallId() : "null");
+        map.putString("encryptedKey", paymentSummary.getEncKey() != null ? paymentSummary.getEncKey() : "null");
+        map.putString("encryptedPaymentData", paymentSummary.getEncPaymentData() != null ? paymentSummary.getEncPaymentData() : "null");
+        map.putString("lastFourDigits", paymentSummary.getLastFourDigits() != null ? paymentSummary.getLastFourDigits() : "null");
+        map.putString("paymentMethodType", paymentSummary.getPaymentMethodType() != null ? paymentSummary.getPaymentMethodType() : "null");
+        map.putString("postalCode", paymentSummary.getPostalCode() != null ? paymentSummary.getPostalCode() : "null");
+        map.putInt("cardBrand", RNVisaCheckoutHelper.getCardBrandCodeFromString(paymentSummary.getCardBrand()));
+        map.putInt("country", RNVisaCheckoutHelper.getCountryCodeFromString(paymentSummary.getCountryCode()));
+        return map;
+    }
+
+    public static void emitCardCheckoutEvent(int viewTag, VisaPaymentSummary paymentSummary, ReactContext ctx) {
+        CardCheckoutEvent event = CardCheckoutEvent.obtain(viewTag, paymentSummary);
+        ctx.getNativeModule(UIManagerModule.class).getEventDispatcher().dispatchEvent(event);
+    }
+
+    public static void emitCardCheckoutErrorEvent(int viewTag, String errorCode, String errorMessage, ReactContext ctx) {
+        CardCheckoutEventError event = CardCheckoutEventError.obtain(viewTag, errorCode, errorMessage);
+        ctx.getNativeModule(UIManagerModule.class).getEventDispatcher().dispatchEvent(event);
     }
 }
