@@ -1,6 +1,8 @@
 
 # react-native-visa-checkout
 
+![](https://media.giphy.com/media/26DN6CPI32bApp5AI/giphy.gif)
+
 ## Getting started
 
 `$ npm install react-native-visa-checkout --save`
@@ -10,7 +12,6 @@
 `$ react-native link react-native-visa-checkout`
 
 ### Manual installation
-
 
 #### iOS
 
@@ -307,5 +308,3 @@ console.log(checkoutData);
 ### RNVisaCheckoutButton
 
 See the Example app in this repository to see a demo of the RNVisaCheckoutButton in action.
-
-
