@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { RNVisaCheckoutButton } from 'react-native-visa-checkout';
 
-export default class CameraScreen extends React.Component {
+export default class ExampleScreen extends React.Component {
 
   onCardCheckout = (event) => {
     console.log('onCardCheckout');
