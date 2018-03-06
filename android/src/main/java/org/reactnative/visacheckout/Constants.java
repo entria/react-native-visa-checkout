@@ -66,6 +66,7 @@ public interface Constants {
     int COUNTRY_KUWAIT = 23;
     int COUNTRY_SAUDI_ARABIA = 24;
     int COUNTRY_QATAR = 25;
+    int COUNTRY_INVALID = -1;
 
     int CARD_BRAND_AMEX = 0;
     int CARD_BRAND_DISCOVER = 1;
@@ -73,5 +74,6 @@ public interface Constants {
     int CARD_BRAND_ELO = 3;
     int CARD_BRAND_MASTERCARD = 4;
     int CARD_BRAND_VISA = 5;
+    int CARD_INVALID = -1;
 
 }

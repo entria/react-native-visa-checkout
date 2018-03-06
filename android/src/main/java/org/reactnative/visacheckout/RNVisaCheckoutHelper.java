@@ -119,6 +119,7 @@ public class RNVisaCheckoutHelper {
 
     public static int getCountryCodeFromString(String country) {
         int countryCode = -1;
+        if (country == null) return countryCode;
         switch (country) {
             case Profile.Country.AR:
                 countryCode = Constants.COUNTRY_ARGENTINA;
@@ -206,6 +207,7 @@ public class RNVisaCheckoutHelper {
 
     public static int getCardBrandCodeFromString(String cardBrand) {
         int cardCode = -1;
+        if (cardBrand == null) return cardCode;
         switch (cardBrand) {
             case Profile.CardBrand.AMEX:
                 cardCode = Constants.CARD_BRAND_AMEX;

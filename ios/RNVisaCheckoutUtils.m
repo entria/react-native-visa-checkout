@@ -14,8 +14,8 @@
 + (NSDictionary *) createJsonResponseFromCheckoutResult:(VisaCheckoutResult *)result {
     NSMutableDictionary *response = [[NSMutableDictionary alloc] init];
     response[@"callId"] = result.callId ? result.callId : @"null";
-    response[@"cardBrand"] = [NSNumber numberWithInteger:result.cardBrand];
-    response[@"country"] = [NSNumber numberWithInteger:result.country];
+    response[@"cardBrand"] = [NSNumber numberWithInteger:result ? result.cardBrand : -1];
+    response[@"country"] = [NSNumber numberWithInteger:result ? result.country : -1];
     response[@"encryptedKey"] = result.encryptedKey ? result.encryptedKey : @"null";
     response[@"encryptedPaymentData"] = result.encryptedPaymentData ? result.encryptedPaymentData : @"null";
     response[@"lastFourDigits"] = result.lastFourDigits ? result.lastFourDigits : @"null";

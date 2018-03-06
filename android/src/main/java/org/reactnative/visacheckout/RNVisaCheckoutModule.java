@@ -115,6 +115,7 @@ public class RNVisaCheckoutModule extends ReactContextBaseJavaModule {
                         put("UnitedArabEmirates", Constants.COUNTRY_UNITED_ARAB_EMIRATES);
                         put("UnitedKingdom", Constants.COUNTRY_UNITED_KINGDOM);
                         put("UnitedStates", Constants.COUNTRY_UNITED_STATES);
+                        put("Invalid", Constants.COUNTRY_INVALID);
                     }
                 });
             }
@@ -159,6 +160,7 @@ public class RNVisaCheckoutModule extends ReactContextBaseJavaModule {
                         put("Elo", Constants.CARD_BRAND_ELO);
                         put("Mastercard", Constants.CARD_BRAND_MASTERCARD);
                         put("Visa", Constants.CARD_BRAND_VISA);
+                        put("Invalid", Constants.CARD_INVALID);
                     }
                 });
             }

@@ -47,7 +47,8 @@
                      @"Ukraine":@(VisaCountryUkraine),
                      @"Kuwait":@(VisaCountryKuwait),
                      @"SaudiArabia":@(VisaCountrySaudiArabia),
-                     @"Qatar":@(VisaCountryQatar)
+                     @"Qatar":@(VisaCountryQatar),
+                     @"Invalid":@(-1)
                      },
              @"Currency":@{
                      @"AED":@(VisaCurrencyAed),
@@ -81,7 +82,8 @@
                      @"Electron":@(VisaCardBrandElectron),
                      @"Elo":@(VisaCardBrandElo),
                      @"Mastercard":@(VisaCardBrandMastercard),
-                     @"Visa":@(VisaCardBrandVisa)
+                     @"Visa":@(VisaCardBrandVisa),
+                     @"Invalid":@(-1)
                      },
              @"CardStyle":@{
                      @"Neutral":@(VisaCheckoutButtonStyleNeutral),
