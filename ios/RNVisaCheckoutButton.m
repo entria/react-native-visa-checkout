@@ -44,7 +44,7 @@
 
 - (void)updateCheckoutOptions:(NSDictionary *)options {
     self.transactionTotal = [options[@"total"] doubleValue];
-    self.transactionTotal = [options[@"currency"] integerValue];
+    self.currencyCode = [options[@"currency"] integerValue];
     [self updateOnCheckout];
 }
 
