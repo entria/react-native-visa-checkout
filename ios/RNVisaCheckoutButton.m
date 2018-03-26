@@ -10,6 +10,7 @@
 #import <React/UIView+React.h>
 #import <VisaCheckoutSDK/VisaCheckout.h>
 #import "RNVisaCheckoutUtils.h"
+#import <math.h>
 
 @interface RNVisaCheckoutButton()
 
@@ -49,7 +50,7 @@
 }
 
 - (void) updateOnCheckout {
-    VisaCurrencyAmount *amount = [[VisaCurrencyAmount alloc] initWithDouble:self.transactionTotal];
+    VisaCurrencyAmount *amount = [[VisaCurrencyAmount alloc] initWithDouble:trunc(self.transactionTotal * 100) / 100];
     [self.visaCheckoutButton onCheckoutWithTotal:amount
                                         currency:self.currencyCode
                                       completion:^(VisaCheckoutResult *result) {

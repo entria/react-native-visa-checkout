@@ -109,51 +109,59 @@ RCT_REMAP_METHOD(configureProfile,
                  resolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
 {
-    [VisaCheckoutSDK configureWithEnvironment:environment.integerValue
-                                       apiKey:apiKey
-                                  profileName:profileName
-                                       result:^(NSInteger result) {
-                                           VisaCheckoutConfigStatus statusCode = result;
-                                           if (statusCode == VisaCheckoutConfigStatusSuccess) {
-                                               resolve(@{@"status":@(result)});
-                                           } else {
-                                               NSString *errorString = nil;
-                                               NSString *errorCode = nil;
-                                               switch (statusCode) {
-                                                   case VisaCheckoutConfigStatusDebugModeNotSupported:
-                                                       errorString = @"Debug mode not supported error";
-                                                       errorCode = @"E_CONFIGURE_DEBUG_MODE";
-                                                       break;
-                                                   case VisaCheckoutConfigStatusInternalError:
-                                                       errorString = @"Visa Checkout internal error";
-                                                       errorCode = @"E_CONFIGURE_INTERNAL_ERROR";
-                                                       break;
-                                                   case VisaCheckoutConfigStatusInvalidAPIKey:
-                                                       errorString = @"Invalid API key error";
-                                                       errorCode = @"E_CONFIGURE_INVALID_API_KEY";
-                                                       break;
-                                                   case VisaCheckoutConfigStatusInvalidProfileName:
-                                                       errorString = @"Invalid profile name error";
-                                                       errorCode = @"E_CONFIGURE_INVALID_PROFILE_NAME";
-                                                       break;
-                                                   case VisaCheckoutConfigStatusNetworkFailure:
-                                                       errorString = @"Network failure error";
-                                                       errorCode = @"E_CONFIGURE_NETWORK_FAILURE";
-                                                       break;
-                                                   case VisaCheckoutConfigStatusNoCommonSupportedOrientations:
-                                                       errorString = @"No common supported orientations error";
-                                                       errorCode = @"E_CONFIGURE_NO_COMMON_ORIENTATIONS";
-                                                       break;
-                                                   case VisaCheckoutConfigStatusSdkVersionDeprecation:
-                                                       errorString = @"SDK version deprecation error";
-                                                       errorCode = @"E_CONFIGURE_UNSUPPORTED_SDK_VERSION";
-                                                       break;
-                                                   default:
-                                                       break;
-                                               }
-                                               reject(errorCode, errorString, nil);
-                                           }
-                                       }];
+    VisaProfile *profile = [[VisaProfile alloc] initWithEnvironment:environment.integerValue
+                                                             apiKey:apiKey
+                                                        profileName:profileName];
+    profile.datalevel = VisaDataLevelFull;
+    
+    [profile acceptedCardBrands: @[@(VisaCardBrandVisa),
+                                   @(VisaCardBrandMastercard),
+                                   @(VisaCardBrandDiscover),
+                                   @(VisaCardBrandAmex),
+                                   @(VisaCardBrandElectron),
+                                   @(VisaCardBrandElo)]];
+    [VisaCheckoutSDK configureWithProfile:profile result:^(NSInteger result) {
+        VisaCheckoutConfigStatus statusCode = result;
+        if (statusCode == VisaCheckoutConfigStatusSuccess) {
+            resolve(@{@"status":@(result)});
+        } else {
+            NSString *errorString = nil;
+            NSString *errorCode = nil;
+            switch (statusCode) {
+                case VisaCheckoutConfigStatusDebugModeNotSupported:
+                    errorString = @"Debug mode not supported error";
+                    errorCode = @"E_CONFIGURE_DEBUG_MODE";
+                    break;
+                case VisaCheckoutConfigStatusInternalError:
+                    errorString = @"Visa Checkout internal error";
+                    errorCode = @"E_CONFIGURE_INTERNAL_ERROR";
+                    break;
+                case VisaCheckoutConfigStatusInvalidAPIKey:
+                    errorString = @"Invalid API key error";
+                    errorCode = @"E_CONFIGURE_INVALID_API_KEY";
+                    break;
+                case VisaCheckoutConfigStatusInvalidProfileName:
+                    errorString = @"Invalid profile name error";
+                    errorCode = @"E_CONFIGURE_INVALID_PROFILE_NAME";
+                    break;
+                case VisaCheckoutConfigStatusNetworkFailure:
+                    errorString = @"Network failure error";
+                    errorCode = @"E_CONFIGURE_NETWORK_FAILURE";
+                    break;
+                case VisaCheckoutConfigStatusNoCommonSupportedOrientations:
+                    errorString = @"No common supported orientations error";
+                    errorCode = @"E_CONFIGURE_NO_COMMON_ORIENTATIONS";
+                    break;
+                case VisaCheckoutConfigStatusSdkVersionDeprecation:
+                    errorString = @"SDK version deprecation error";
+                    errorCode = @"E_CONFIGURE_UNSUPPORTED_SDK_VERSION";
+                    break;
+                default:
+                    break;
+            }
+            reject(errorCode, errorString, nil);
+        }
+    }];
 }
 
 RCT_REMAP_METHOD(checkout,
