@@ -20,6 +20,7 @@ type CheckoutResponse = {
   encryptedKey: string,
 }
 export const checkoutAsync = async (total: number, currency: number): Promise<CheckoutResponse> => {
+  console.log();
   return await RNVisaCheckout.checkout(total, currency);
 };
 
