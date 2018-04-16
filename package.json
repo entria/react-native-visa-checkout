@@ -11,7 +11,8 @@
     "eslint-plugin-react-native": "^3.2.0",
     "lint-staged": "^5.0.0",
     "pre-commit": "^1.2.2",
-    "prettier": "^1.9.2"
+    "prettier": "^1.9.2",
+    "react-native": "^0.55.2"
   },
   "lint-staged": {
     "src/*.js": [
@@ -40,8 +41,5 @@
   "license": "",
   "dependencies": {
     "prop-types": "^15.5.10"
-  },
-  "peerDependencies": {
-    "react-native": "^0.41.2"
   }
 }
