@@ -4,14 +4,16 @@
   "description": "",
   "main": "src/index.js",
   "devDependencies": {
-    "babel-eslint": "^8.0.2",
-    "eslint": "^4.12.0",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-react": "^7.3.0",
+    "babel-eslint": "^8.2.1",
+    "eslint": "^4.17.0",
+    "eslint-plugin-flowtype": "^2.46.2",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-react": "^7.6.1",
     "eslint-plugin-react-native": "^3.2.0",
-    "lint-staged": "^5.0.0",
+    "lint-staged": "^7.0.0",
     "pre-commit": "^1.2.2",
-    "prettier": "^1.9.2",
+    "prettier": "^1.12.0",
+    "react": "16.3.1",
     "react-native": "^0.55.2"
   },
   "lint-staged": {
@@ -24,8 +26,9 @@
   "pre-commit": "lint:staged",
   "scripts": {
     "check": "npm run lint",
-    "lint": "eslint --ext js src",
+    "lint": "eslint src --max-warnings=0",
     "lint:staged": "lint-staged",
+    "prettier": "prettier --write --single-quote true --trailing-comma all --print-width 100",
     "release:patch": "npm run check && npm version patch && git push --follow-tags && npm publish --access public",
     "release:minor": "npm run check && npm version minor && git push --follow-tags && npm publish --access public",
     "release:major": "npm run check && npm version major && git push --follow-tags && npm publish --access public"
