@@ -3,6 +3,12 @@
 #import "RNVisaCheckoutButton.h"
 #import "RNVisaCheckoutUtils.h"
 
+@interface RNVisaCheckout()
+
+@property (nonatomic, assign) BOOL hasResolvedConfigurePromise;
+
+@end
+
 @implementation RNVisaCheckout
 
 - (UIView *)view {
@@ -109,6 +115,7 @@ RCT_REMAP_METHOD(configureProfile,
                  resolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
 {
+    self.hasResolvedConfigurePromise = NO;
     VisaProfile *profile = [[VisaProfile alloc] initWithEnvironment:environment.integerValue
                                                              apiKey:apiKey
                                                         profileName:profileName];
@@ -123,7 +130,10 @@ RCT_REMAP_METHOD(configureProfile,
     [VisaCheckoutSDK configureWithProfile:profile result:^(NSInteger result) {
         VisaCheckoutConfigStatus statusCode = result;
         if (statusCode == VisaCheckoutConfigStatusSuccess) {
-            resolve(@{@"status":@(result)});
+            if (!self.hasResolvedConfigurePromise) {
+                self.hasResolvedConfigurePromise = YES;
+                resolve(@{@"status":@(result)});
+            }
         } else {
             NSString *errorString = nil;
             NSString *errorCode = nil;
@@ -159,7 +169,10 @@ RCT_REMAP_METHOD(configureProfile,
                 default:
                     break;
             }
-            reject(errorCode, errorString, nil);
+            if (!self.hasResolvedConfigurePromise) {
+                self.hasResolvedConfigurePromise = YES;
+                reject(errorCode, errorString, nil);
+            }
         }
     }];
 }
