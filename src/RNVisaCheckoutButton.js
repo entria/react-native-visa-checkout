@@ -1,7 +1,13 @@
 // @flow
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NativeModules, findNodeHandle, requireNativeComponent, ViewPropTypes, Platform } from 'react-native';
+import {
+  NativeModules,
+  findNodeHandle,
+  requireNativeComponent,
+  ViewPropTypes,
+  Platform,
+} from 'react-native';
 
 const { RNVisaCheckout } = NativeModules;
 
@@ -16,6 +22,9 @@ type Props = ViewPropTypes & {
   onCardCheckout?: Function,
   onCardCheckoutError?: Function,
   checkoutOptions?: CheckoutOptions,
+  apiKey: string,
+  environment: number,
+  profileName: string,
 };
 
 export default class CheckoutButton extends React.Component<Props> {
@@ -34,27 +43,33 @@ export default class CheckoutButton extends React.Component<Props> {
     onCardCheckout: PropTypes.func,
     onCardCheckoutError: PropTypes.func,
     checkoutOptions: PropTypes.object,
+    apiKey: PropTypes.string,
+    environment: PropTypes.number,
+    profileName: PropTypes.string,
   };
 
   static defaultProps: Object = {
     cardStyle: RNVisaCheckout.CardStyle.Standard,
     cardAnimations: true,
     checkoutOptions: { total: 0.0, currency: 0 },
+    apiKey: '',
+    environment: RNVisaCheckout.Environment.Sandbox,
+    profileName: 'default',
   };
 
-  _onCardCheckout = (event) => {
+  _onCardCheckout = event => {
     if (this.props.onCardCheckout) {
       this.props.onCardCheckout(event.nativeEvent);
     }
-  }
+  };
 
-  _onCardCheckoutError = (event) => {
+  _onCardCheckoutError = event => {
     if (this.props.onCardCheckoutError) {
       this.props.onCardCheckoutError(event.nativeEvent);
     }
-  }
+  };
 
-  _setReference = (ref) => {
+  _setReference = ref => {
     if (ref) {
       this._buttonRef = ref;
       this._buttonHandle = findNodeHandle(ref);
@@ -64,8 +79,9 @@ export default class CheckoutButton extends React.Component<Props> {
     }
   };
 
-  async componentWillMount() {
-    // const data = await RNVisaCheckout.configureProfile(RNVisaCheckout.Environment.Sandbox, 'apiKey', null);
+  componentWillMount() {
+    const { apiKey, profileName, environment } = this.props;
+    RNVisaCheckout.configureProfile(environment, apiKey, profileName);
   }
 
   render() {

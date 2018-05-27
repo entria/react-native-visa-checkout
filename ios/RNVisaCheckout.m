@@ -3,16 +3,16 @@
 #import "RNVisaCheckoutButton.h"
 #import "RNVisaCheckoutUtils.h"
 
-@interface RNVisaCheckout()
+@interface RNVisaCheckout ()
 
-@property (nonatomic, assign) BOOL hasResolvedConfigurePromise;
+@property(nonatomic, strong) VisaProfile *profile;
 
 @end
 
 @implementation RNVisaCheckout
 
 - (UIView *)view {
-    return [[RNVisaCheckoutButton alloc] init];
+    return [[RNVisaCheckoutButton alloc] initWithProfile:self.profile];
 }
 
 - (dispatch_queue_t)methodQueue
@@ -111,11 +111,8 @@ RCT_EXPORT_VIEW_PROPERTY(onCardCheckoutError, RCTDirectEventBlock);
 RCT_REMAP_METHOD(configureProfile,
                  withEnvironment:(nonnull NSNumber *)environment
                  apiKey:(NSString *)apiKey
-                 profileName:(NSString *)profileName
-                 resolver:(RCTPromiseResolveBlock)resolve
-                 rejecter:(RCTPromiseRejectBlock)reject)
+                 profileName:(NSString *)profileName)
 {
-    self.hasResolvedConfigurePromise = NO;
     VisaProfile *profile = [[VisaProfile alloc] initWithEnvironment:environment.integerValue
                                                              apiKey:apiKey
                                                         profileName:profileName];
@@ -127,54 +124,7 @@ RCT_REMAP_METHOD(configureProfile,
                                    @(VisaCardBrandAmex),
                                    @(VisaCardBrandElectron),
                                    @(VisaCardBrandElo)]];
-    [VisaCheckoutSDK configureWithProfile:profile result:^(NSInteger result) {
-        VisaCheckoutConfigStatus statusCode = result;
-        if (statusCode == VisaCheckoutConfigStatusSuccess) {
-            if (!self.hasResolvedConfigurePromise) {
-                self.hasResolvedConfigurePromise = YES;
-                resolve(@{@"status":@(result)});
-            }
-        } else {
-            NSString *errorString = nil;
-            NSString *errorCode = nil;
-            switch (statusCode) {
-                case VisaCheckoutConfigStatusDebugModeNotSupported:
-                    errorString = @"Debug mode not supported error";
-                    errorCode = @"E_CONFIGURE_DEBUG_MODE";
-                    break;
-                case VisaCheckoutConfigStatusInternalError:
-                    errorString = @"Visa Checkout internal error";
-                    errorCode = @"E_CONFIGURE_INTERNAL_ERROR";
-                    break;
-                case VisaCheckoutConfigStatusInvalidAPIKey:
-                    errorString = @"Invalid API key error";
-                    errorCode = @"E_CONFIGURE_INVALID_API_KEY";
-                    break;
-                case VisaCheckoutConfigStatusInvalidProfileName:
-                    errorString = @"Invalid profile name error";
-                    errorCode = @"E_CONFIGURE_INVALID_PROFILE_NAME";
-                    break;
-                case VisaCheckoutConfigStatusNetworkFailure:
-                    errorString = @"Network failure error";
-                    errorCode = @"E_CONFIGURE_NETWORK_FAILURE";
-                    break;
-                case VisaCheckoutConfigStatusNoCommonSupportedOrientations:
-                    errorString = @"No common supported orientations error";
-                    errorCode = @"E_CONFIGURE_NO_COMMON_ORIENTATIONS";
-                    break;
-                case VisaCheckoutConfigStatusSdkVersionDeprecation:
-                    errorString = @"SDK version deprecation error";
-                    errorCode = @"E_CONFIGURE_UNSUPPORTED_SDK_VERSION";
-                    break;
-                default:
-                    break;
-            }
-            if (!self.hasResolvedConfigurePromise) {
-                self.hasResolvedConfigurePromise = YES;
-                reject(errorCode, errorString, nil);
-            }
-        }
-    }];
+    self.profile = profile;
 }
 
 RCT_REMAP_METHOD(checkout,
