@@ -3,19 +3,15 @@ package org.reactnative.visacheckout;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
 
-import com.facebook.react.bridge.ActivityEventListener;
 import com.facebook.react.bridge.Arguments;
-import com.facebook.react.bridge.BaseActivityEventListener;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableMap;
+import com.visa.checkout.Profile;
 import com.visa.checkout.VisaCheckoutSdk;
-import com.visa.checkout.VisaCheckoutSdkInitListener;
-import com.visa.checkout.VisaPaymentSummary;
 
 import java.math.BigDecimal;
 import java.util.Collections;
@@ -49,7 +45,6 @@ public class RNVisaCheckoutModule extends ReactContextBaseJavaModule {
     public RNVisaCheckoutModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
-        reactContext.addActivityEventListener(mActivityEventListener);
     }
 
     @Override

@@ -2,7 +2,6 @@ package org.reactnative.visacheckout;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
@@ -10,8 +9,10 @@ import android.view.LayoutInflater;
 import android.widget.RelativeLayout;
 
 import com.facebook.react.uimanager.ThemedReactContext;
+import com.visa.checkout.CheckoutButton;
+import com.visa.checkout.PurchaseInfo;
 import com.visa.checkout.VisaCheckoutSdk;
-import com.visa.checkout.widget.VisaCheckoutButton;
+import com.visa.checkout.VisaPaymentSummary;
 
 import java.math.BigDecimal;
 
