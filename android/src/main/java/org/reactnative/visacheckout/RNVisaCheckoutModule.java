@@ -3,19 +3,15 @@ package org.reactnative.visacheckout;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
 
-import com.facebook.react.bridge.ActivityEventListener;
 import com.facebook.react.bridge.Arguments;
-import com.facebook.react.bridge.BaseActivityEventListener;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableMap;
+import com.visa.checkout.Profile;
 import com.visa.checkout.VisaCheckoutSdk;
-import com.visa.checkout.VisaCheckoutSdkInitListener;
-import com.visa.checkout.VisaPaymentSummary;
 
 import java.math.BigDecimal;
 import java.util.Collections;
@@ -27,7 +23,7 @@ import javax.annotation.Nullable;
 public class RNVisaCheckoutModule extends ReactContextBaseJavaModule {
 
     private Promise mCheckoutPromise;
-    private RNVisaCheckoutButtonView mView;
+    private static Profile mProfile;
 
     private static final String E_CHECKOUT_CANCELLED = "E_CHECKOUT_CANCELLED";
     private static final String E_FAILED_TO_SHOW_CHECKOUT = "E_FAILED_TO_SHOW_CHECKOUT";
@@ -49,12 +45,15 @@ public class RNVisaCheckoutModule extends ReactContextBaseJavaModule {
     public RNVisaCheckoutModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
-        reactContext.addActivityEventListener(mActivityEventListener);
     }
 
     @Override
     public String getName() {
         return "RNVisaCheckout";
+    }
+    
+    public static Profile getProfile() {
+        return mProfile;
     }
 
     @Nullable
@@ -203,65 +202,13 @@ public class RNVisaCheckoutModule extends ReactContextBaseJavaModule {
         return myMap;
     }
 
-    private final ActivityEventListener mActivityEventListener = new BaseActivityEventListener() {
-
-        @Override
-        public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent intent) {
-            if (requestCode == Constants.VISA_CARD_CHECKOUT) {
-                WritableMap map = getResponseData(resultCode);
-                if (map.getBoolean("status") && intent != null) {
-                    final VisaPaymentSummary paymentSummary = intent.getParcelableExtra(VisaCheckoutSdk.INTENT_PAYMENT_SUMMARY);
-                    RNVisaCheckoutHelper.emitCardCheckoutEvent(SingletonViewHolder.getInstance().getView().getId(), paymentSummary, getReactApplicationContext());
-                } else {
-                    String errorCode = map.getString("errorCode");
-                    String errorMessage = map.getString("errorMessage");
-                    RNVisaCheckoutHelper.emitCardCheckoutErrorEvent(SingletonViewHolder.getInstance().getView().getId(), errorCode, errorMessage, getReactApplicationContext());
-                }
-            } else if (requestCode == Constants.VISA_CHECKOUT_REQUEST) {
-                if (mCheckoutPromise != null) {
-                    WritableMap map = getResponseData(resultCode);
-                    if (map.getBoolean("status") && intent != null) {
-                        final VisaPaymentSummary paymentSummary = intent.getParcelableExtra(VisaCheckoutSdk.INTENT_PAYMENT_SUMMARY);
-                        mCheckoutPromise.resolve(RNVisaCheckoutHelper.getPaymentSummaryMap(paymentSummary));
-                    } else {
-                        String errorCode = map.getString("errorCode");
-                        String errorMessage = map.getString("errorMessage");
-                        mCheckoutPromise.reject(errorCode, errorMessage);
-                    }
-                    mCheckoutPromise = null;
-                }
-            }
-        }
-    };
 
     @ReactMethod
-    public void configureProfile(final int environment, final String apiKey, final String profileName, final Promise promise) {
+    public void configureProfile(final int environment, final String apiKey, final String profileName) {
         String envString = RNVisaCheckoutHelper.getEnvironmentStringFromConstant(environment);
-        VisaCheckoutSdk.init(getReactApplicationContext(), envString,
-                apiKey, profileName,
-                new VisaCheckoutSdkInitListener() {
-                    @Override public void status(int code, String message) {
-                        Log.d("TRAKS", "Code:" + code + "  Message:" + message);
-                        if (code == VisaCheckoutSdk.Status.SUCCESS) {
-                            WritableMap map = Arguments.createMap();
-                            map.putInt("status", VisaCheckoutSdk.Status.SUCCESS);
-                            promise.resolve(map);
-                        } else if (code == VisaCheckoutSdk.Status.INVALID_API_KEY){
-                            promise.reject(E_CONFIGURE_INVALID_API_KEY, "Invalid API Key");
-                        } else if (code == VisaCheckoutSdk.Status.UNSUPPORTED_SDK_VERSION) {
-                            promise.reject(E_CONFIGURE_UNSUPPORTED_SDK_VERSION, "Unsupported SDK version");
-                        } else if (code == VisaCheckoutSdk.Status.OS_VERSION_NOT_SUPPORTED) {
-                            promise.reject(E_CONFIGURE_OS_VERSION_NOT_SUPPORTED, "OS version not supported");
-                        } else if (code == VisaCheckoutSdk.Status.FAIL_TO_INITIALIZE) {
-                            promise.reject(E_CONFIGURE_FAIL_TO_INITIALIZE, "Failed to initialize");
-                        } else if (code == VisaCheckoutSdk.Status.MISSING_PARAMETER) {
-                            promise.reject(E_CONFIGURE_MISSING_PARAMETER, "Missing parameter");
-                        } else if (code == VisaCheckoutSdk.Status.INTERNAL_ERROR) {
-                            promise.reject(E_CONFIGURE_INTERNAL_ERROR, "Internal error");
-                        }
-                    }
-                }
-        );
+        mProfile = new Profile.ProfileBuilder(apiKey, envString)
+                    .setProfileName(profileName)
+                    .build();
     }
 
     @ReactMethod

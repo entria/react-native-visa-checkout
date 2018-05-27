@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class VisaProfile;
+
 @interface RNVisaCheckoutButton : UIView
 
 @property (nonatomic, assign) NSInteger cardStyle;
 @property (nonatomic, assign) BOOL cardAnimations;
 
+- (instancetype)initWithProfile:(VisaProfile *)profile;
 - (void)setCardStyle:(NSInteger)cardStyle;
 - (void)setCardAnimations:(BOOL)cardAnimations;
 - (void)updateCheckoutOptions:(NSDictionary *)options;

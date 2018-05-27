@@ -2,7 +2,6 @@ package org.reactnative.visacheckout;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
@@ -10,8 +9,10 @@ import android.view.LayoutInflater;
 import android.widget.RelativeLayout;
 
 import com.facebook.react.uimanager.ThemedReactContext;
+import com.visa.checkout.CheckoutButton;
+import com.visa.checkout.PurchaseInfo;
 import com.visa.checkout.VisaCheckoutSdk;
-import com.visa.checkout.widget.VisaCheckoutButton;
+import com.visa.checkout.VisaPaymentSummary;
 
 import java.math.BigDecimal;
 
@@ -20,6 +21,8 @@ import java.math.BigDecimal;
  */
 
 public class RNVisaCheckoutButtonView extends RelativeLayout {
+    
+    private ThemedReactContext mContext;
 
     public RNVisaCheckoutButtonView(ThemedReactContext context) {
         super(context);
@@ -43,13 +46,14 @@ public class RNVisaCheckoutButtonView extends RelativeLayout {
     }
 
     private void init(@NonNull ThemedReactContext context) {
+        mContext = context;
         LayoutInflater inflater = LayoutInflater.from(context);
         inflater.inflate(R.layout.custom_view, this, true);
         SingletonViewHolder.getInstance().setView(this);
     }
 
     public void setCardStyle(int cardStyle) {
-        VisaCheckoutButton btn = (VisaCheckoutButton)findViewById(R.id.visaCheckoutButton);
+        CheckoutButton btn = (CheckoutButton)findViewById(R.id.visaCheckoutButton);
         if (cardStyle == Constants.CARD_STYLE_STANDARD) {
             btn.setColorStyle("STANDARD");
         } else {
@@ -58,22 +62,28 @@ public class RNVisaCheckoutButtonView extends RelativeLayout {
     }
 
     public void setCardAnimations(boolean isEnabled) {
-        VisaCheckoutButton btn = (VisaCheckoutButton)findViewById(R.id.visaCheckoutButton);
+        CheckoutButton btn = (CheckoutButton)findViewById(R.id.visaCheckoutButton);
         btn.setAnimation(isEnabled);
     }
 
     public void setCheckoutOptions(final double total, final int currencyCode, final Activity activity) {
-        VisaCheckoutButton btn = (VisaCheckoutButton)findViewById(R.id.visaCheckoutButton);
-        btn.setCheckoutListener(new VisaCheckoutButton.CheckoutWithVisaListener() {
+        CheckoutButton btn = (CheckoutButton)findViewById(R.id.visaCheckoutButton);
+        String currencyString = RNVisaCheckoutHelper.getCurrencyStringFromConstant(currencyCode);
+        PurchaseInfo purchaseInfo = new PurchaseInfo.PurchaseInfoBuilder(new BigDecimal(total),
+                                                                         currencyString)
+                                        .build();
+        btn.init(activity, RNVisaCheckoutModule.getProfile(), purchaseInfo, new VisaCheckoutSdk.VisaCheckoutResultListener() {
             @Override
-            public void onClick() {
-                String currencyString = RNVisaCheckoutHelper.getCurrencyStringFromConstant(currencyCode);
-                Intent intent = VisaCheckoutSdk.getCheckoutIntent(
-                        activity,
-                        new BigDecimal(total),
-                        currencyString
-                );
-                activity.startActivityForResult(intent, Constants.VISA_CARD_CHECKOUT);
+            public void onResult(VisaPaymentSummary visaPaymentSummary) {
+                if (VisaPaymentSummary.PAYMENT_SUCCESS.equalsIgnoreCase(visaPaymentSummary.getStatusName())) {
+                    RNVisaCheckoutHelper.emitCardCheckoutEvent(SingletonViewHolder.getInstance().getView().getId(), visaPaymentSummary, mContext);
+                } else if (VisaPaymentSummary.PAYMENT_CANCEL.equalsIgnoreCase(visaPaymentSummary.getStatusName())) {
+                    RNVisaCheckoutHelper.emitCardCheckoutErrorEvent(SingletonViewHolder.getInstance().getView().getId(), "", "User Cancelled", mContext);
+                } else if (VisaPaymentSummary.PAYMENT_ERROR.equalsIgnoreCase(visaPaymentSummary.getStatusName())) {
+                    RNVisaCheckoutHelper.emitCardCheckoutErrorEvent(SingletonViewHolder.getInstance().getView().getId(), "", "Payment Error", mContext);
+                } else if (VisaPaymentSummary.PAYMENT_FAILURE.equalsIgnoreCase(visaPaymentSummary.getStatusName())) {
+                    RNVisaCheckoutHelper.emitCardCheckoutErrorEvent(SingletonViewHolder.getInstance().getView().getId(), "", "Payment Failure", mContext);
+                }
             }
         });
 

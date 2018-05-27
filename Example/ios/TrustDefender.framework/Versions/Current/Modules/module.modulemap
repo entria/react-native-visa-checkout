@@ -1,6 +1,0 @@
-framework module TrustDefender {
-    umbrella header "TrustDefender.h"
-
-    export *
-    module * { export * }
-}

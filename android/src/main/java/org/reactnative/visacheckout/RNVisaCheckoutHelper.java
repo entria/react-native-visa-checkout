@@ -351,9 +351,9 @@ public class RNVisaCheckoutHelper {
         map.putString("encryptedPaymentData", paymentSummary.getEncPaymentData() != null ? paymentSummary.getEncPaymentData() : "null");
         map.putString("lastFourDigits", paymentSummary.getLastFourDigits() != null ? paymentSummary.getLastFourDigits() : "null");
         map.putString("paymentMethodType", paymentSummary.getPaymentMethodType() != null ? paymentSummary.getPaymentMethodType() : "null");
-        map.putString("postalCode", paymentSummary.getPostalCode() != null ? paymentSummary.getPostalCode() : "null");
+//        map.putString("postalCode", paymentSummary.getPostalCode() != null ? paymentSummary.getPostalCode() : "null");
         map.putInt("cardBrand", RNVisaCheckoutHelper.getCardBrandCodeFromString(paymentSummary.getCardBrand()));
-        map.putInt("country", RNVisaCheckoutHelper.getCountryCodeFromString(paymentSummary.getCountryCode()));
+//        map.putInt("country", RNVisaCheckoutHelper.getCountryCodeFromString(paymentSummary.getCountryCode()));
         return map;
     }
 

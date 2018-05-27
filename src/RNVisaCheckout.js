@@ -3,11 +3,8 @@ import { NativeModules } from 'react-native';
 
 const { RNVisaCheckout } = NativeModules;
 
-type ConfigureResponse = {
-  status: number,
-};
-export const configureProfileAsync = async (environment: number, apiKey: string, profileName: string): Promise<ConfigureResponse> => {
-  return await RNVisaCheckout.configureProfile(environment, apiKey, profileName);
+export const configureProfile = (environment: number, apiKey: string, profileName: string) => {
+  RNVisaCheckout.configureProfile(environment, apiKey, profileName);
 };
 
 type CheckoutResponse = {
@@ -18,7 +15,7 @@ type CheckoutResponse = {
   paymentMethodType: string,
   cardBrand: number,
   encryptedKey: string,
-}
+};
 export const checkoutAsync = async (total: number, currency: number): Promise<CheckoutResponse> => {
   return await RNVisaCheckout.checkout(total, currency);
 };

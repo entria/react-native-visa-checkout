@@ -5,7 +5,7 @@
     android:orientation="vertical">
 
     <!-- Visa Payment Button Integration -->
-    <com.visa.checkout.widget.VisaCheckoutButton
+    <com.visa.checkout.CheckoutButton
         android:id="@+id/visaCheckoutButton"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

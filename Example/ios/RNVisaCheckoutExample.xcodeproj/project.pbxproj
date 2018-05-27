@@ -35,11 +35,10 @@
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* RNCameraExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* RNCameraExampleTests.m */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
-		711279B8202B55AA00E62F8C /* TrustDefender.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 711279B6202B55A600E62F8C /* TrustDefender.framework */; };
-		711279B9202B55AA00E62F8C /* VisaCheckoutSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 711279B7202B55A900E62F8C /* VisaCheckoutSDK.framework */; };
-		711279BA202B55B600E62F8C /* VisaCheckoutSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 711279B7202B55A900E62F8C /* VisaCheckoutSDK.framework */; };
-		711279BB202B55B600E62F8C /* VisaCheckoutSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 711279B7202B55A900E62F8C /* VisaCheckoutSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		711279BF202B55F000E62F8C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 711279BE202B55F000E62F8C /* libz.tbd */; };
+		71F691E220BAE20000E0DA9C /* VisaCheckoutSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71F691E120BAE20000E0DA9C /* VisaCheckoutSDK.framework */; };
+		71F691E320BAE20000E0DA9C /* VisaCheckoutSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71F691E120BAE20000E0DA9C /* VisaCheckoutSDK.framework */; };
+		71F691E520BAE20A00E0DA9C /* VisaCheckoutSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 71F691E120BAE20000E0DA9C /* VisaCheckoutSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		EA0AFD4C79104F36BC95C8C3 /* libRNVisaCheckout.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DEA12825E33D4AFFBD7408C5 /* libRNVisaCheckout.a */; };
@@ -321,7 +320,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				711279BB202B55B600E62F8C /* VisaCheckoutSDK.framework in Embed Frameworks */,
+				71F691E520BAE20A00E0DA9C /* VisaCheckoutSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -352,9 +351,8 @@
 		2D02E4901E0B4A5D006451C7 /* RNVisaCheckoutExample-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RNVisaCheckoutExample-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55BDBA068A754C65A4EA4913 /* libRCTCamera.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTCamera.a; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
-		711279B6202B55A600E62F8C /* TrustDefender.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TrustDefender.framework; sourceTree = "<group>"; };
-		711279B7202B55A900E62F8C /* VisaCheckoutSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VisaCheckoutSDK.framework; sourceTree = "<group>"; };
 		711279BE202B55F000E62F8C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		71F691E120BAE20000E0DA9C /* VisaCheckoutSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VisaCheckoutSDK.framework; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
@@ -367,6 +365,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71F691E320BAE20000E0DA9C /* VisaCheckoutSDK.framework in Frameworks */,
 				140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -375,9 +374,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				71F691E220BAE20000E0DA9C /* VisaCheckoutSDK.framework in Frameworks */,
 				711279BF202B55F000E62F8C /* libz.tbd in Frameworks */,
-				711279B9202B55AA00E62F8C /* VisaCheckoutSDK.framework in Frameworks */,
-				711279B8202B55AA00E62F8C /* TrustDefender.framework in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -390,7 +388,6 @@
 				139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */,
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
-				711279BA202B55B600E62F8C /* VisaCheckoutSDK.framework in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				EA0AFD4C79104F36BC95C8C3 /* libRNVisaCheckout.a in Frameworks */,
 			);
@@ -610,8 +607,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				711279B6202B55A600E62F8C /* TrustDefender.framework */,
-				711279B7202B55A900E62F8C /* VisaCheckoutSDK.framework */,
+				71F691E120BAE20000E0DA9C /* VisaCheckoutSDK.framework */,
 				13B07FAE1A68108700A75B9A /* RNVisaCheckoutExample */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* RNCameraExampleTests */,
@@ -1220,6 +1216,7 @@
 					"$(PROJECT_DIR)/Frameworks/GoogleNetworkingUtilities-1.2.2/Frameworks/frameworks",
 					"$(PROJECT_DIR)/Frameworks/MVDataOutput/Frameworks/frameworks",
 					"$(PROJECT_DIR)/Frameworks/GoogleSymbolUtilities-1.1.1/Frameworks",
+					"$(PROJECT_DIR)",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1263,6 +1260,7 @@
 					"$(PROJECT_DIR)/Frameworks/GoogleNetworkingUtilities-1.2.2/Frameworks/frameworks",
 					"$(PROJECT_DIR)/Frameworks/MVDataOutput/Frameworks/frameworks",
 					"$(PROJECT_DIR)/Frameworks/GoogleSymbolUtilities-1.1.1/Frameworks",
+					"$(PROJECT_DIR)",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
