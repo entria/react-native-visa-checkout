@@ -1,17 +1,25 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { RNVisaCheckoutButton } from 'react-native-visa-checkout';
+import { RNVisaCheckoutButton, RNVisaCheckout } from 'react-native-visa-checkout';
 
 export default class ExampleScreen extends React.Component {
 
   onCardCheckout = (event) => {
     console.log('onCardCheckout');
+    console.log('event: ', event);
     console.log(`callId: ${event.callId}`);
   }
 
   onCardCheckoutError = ({ code, message }) => {
     console.log('onCardCheckoutError');
     console.log(`Error with code: ${code}, message: ${message}`);
+  }
+
+  componentWillMount() {
+    console.log('will mount!2');
+    // RNVisaCheckout.configureProfile(1, 'a', 'default');
+    RNVisaCheckout.configureProfileAsync(RNVisaCheckout.Constants.Environment.Sandbox, 'D07PAGIDFKP5P0D7H18E13sk_kJpEPSmjh3BJReRwIt2VyaUI', 'default');
+    console.log('eita');
   }
 
   render() {

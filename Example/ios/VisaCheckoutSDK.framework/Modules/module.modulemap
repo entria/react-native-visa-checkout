@@ -1,4 +1,6 @@
 framework module VisaCheckoutSDK {
-    header "VisaCheckoutSDK-Swift.h"
-    requires objc
+  umbrella header "VisaCheckout.h"
+
+  export *
+  module * { export * }
 }

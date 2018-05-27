@@ -19,7 +19,7 @@ android {
     buildToolsVersion "26.0.2"
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
         versionName "1.0.0"
@@ -48,14 +48,7 @@ repositories {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     compileOnly 'com.facebook.react:react-native:+'
-    implementation(name: 'visacheckout-android-sdk-5.5.2', ext: 'aar')
-    implementation 'com.squareup.okio:okio:1.11.0'
-    implementation 'com.squareup.okhttp3:okhttp:3.5.0'
-    implementation 'com.google.code.gson:gson:2.8.0'
-    implementation 'com.android.support:design:26.1.0'
-    implementation 'com.android.support:support-v4:26.1.0'
+    implementation(name: 'visacheckout-android-sdk-6.2.0', ext: 'aar')
     implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.google.android.gms:play-services-ads:11.0.4'
-    implementation 'com.google.android.gms:play-services:11.0.4'
 }
   
